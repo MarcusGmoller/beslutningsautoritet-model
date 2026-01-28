@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Beslutningsautoritet – skabelon</title>
+  <style>
+    :root{
+      --grey-1:#bdbdbd;   /* top bar */
+      --grey-2:#dedede;   /* boxes */
+      --grey-3:#c9c9c9;   /* H-side i bar */
+      --ink:#111;
+
+      --gap:26px;
+      --label-col:260px;
+      --col-w:150px;      /* større kolonner */
+      --radius:2px;
+      --font:"Georgia","Times New Roman",serif;
+    }
+
+    body{
+      margin:0;
+      padding:28px;
+      background:#fff;
+      color:var(--ink);
+      font-family:var(--font);
+    }
+
+    .figure{ width:max-content; margin:0 auto; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: var(--label-col) repeat(6, var(--col-w));
+      grid-auto-rows:auto;
+      column-gap: var(--gap);
+      row-gap: 18px;
+      align-items:center;
+    }
+
+    .label{
+      text-align:right;
+      font-weight:700;
+      font-size:20px;
+      line-height:1.1;
+      padding-right:10px;
+      white-space:normal;
+      word-break:break-word;
+    }
+
+    /* Topbar: redigerbar */
+    .topbar{
+      grid-column: 2 / span 6;
+      height:78px;
+      background:var(--grey-1);
+      border-radius:var(--radius);
+      border:1px solid transparent;
+      padding:10px 12px;
+      box-sizing:border-box;
+      font-family:inherit;
+      font-size:16px;
+      line-height:1.25;
+      overflow:auto;
+    }
+
+    .box{
+      background:var(--grey-2);
+      border-radius:var(--radius);
+      border:1px solid transparent;
+      padding:10px 12px;
+      box-sizing:border-box;
+      font-family:inherit;
+      font-size:16px;
+      line-height:1.25;
+      overflow:auto;
+    }
+
+    .topbar:focus,
+    .box[contenteditable="true"]:focus{
+      outline:none;
+      border-color:#7a7a7a;
+      box-shadow:0 0 0 2px rgba(0,0,0,0.08);
+    }
+
+    .h-actions{ height:110px; }   /* større */
+    .h-influence{ height:56px; display:flex; align-items:center; justify-content:center; } /* større */
+    .h-agent{ height:64px; display:flex; align-items:center; justify-content:center; }     /* større */
+
+    select{
+      width:100%;
+      height:100%;
+      border:none;
+      background:transparent;
+      font-family:inherit;
+      font-size:16px;
+      padding:8px 10px;
+      cursor:pointer;
+      outline:none;
+    }
+
+    /* Nederste bar */
+    .authority-wrap{
+      display:grid;
+      grid-template-columns: var(--label-col) repeat(6, var(--col-w));
+      column-gap: var(--gap);
+      margin-top:18px;
+      align-items:center;
+    }
+
+    .authority-bar-area{
+      grid-column: 2 / span 6;
+      position:relative;
+      height:36px;
+    }
+
+    .authority-bar{
+      height:100%;
+      width: calc((6 * var(--col-w)) + (5 * var(--gap)));
+      border-radius:var(--radius);
+      background: linear-gradient(to right,
+        var(--grey-3) 0%,
+        var(--grey-3) 50%,
+        var(--grey-2) 50%,
+        var(--grey-2) 100%
+      );
+    }
+
+    .H, .A{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      font-weight:700;
+      font-size:22px;
+    }
+    .H{ left:-18px; }
+    .A{ right:-18px; }
+
+    .axis-label{
+      text-align:center;
+      font-weight:700;
+      font-size:26px;
+      margin-top:10px;
+    }
+
+    /* PAI / PH */
+    .metrics{
+      width: calc(var(--label-col) + (6 * var(--col-w)) + (5 * var(--gap)));
+      margin:12px auto 0;
+      display:flex;
+      justify-content:center;
+      gap:28px;
+      font-size:20px;
+      font-weight:700;
+    }
+    .metrics .val{
+      font-weight:700;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="figure" aria-label="Konceptmodel for beslutningsautoritet">
+    <div class="grid">
+      <!-- Topbar: nu kan du skrive i den -->
+      <div class="topbar" contenteditable="true" aria-label="Titel/overordnet note"></div>
+
+      <!-- Række 1: Beslutningshandlinger -->
+      <div class="label">Beslutnings<br>handlinger</div>
+      <div class="box h-actions" contenteditable="true" aria-label="Beslutningshandling 1"></div>
+      <div class="box h-actions" contenteditable="true" aria-label="Beslutningshandling 2"></div>
+      <div class="box h-actions" contenteditable="true" aria-label="Beslutningshandling 3"></div>
+      <div class="box h-actions" contenteditable="true" aria-label="Beslutningshandling 4"></div>
+      <div class="box h-actions" contenteditable="true" aria-label="Beslutningshandling 5"></div>
+      <div class="box h-actions" contenteditable="true" aria-label="Beslutningshandling 6"></div>
+
+      <!-- Række 2: Wi -->
+      <div class="label">Grad af indflydelse<br>&amp; konsekvens</div>
+      <div class="box h-influence">
+        <select class="wi" aria-label="Indflydelse for handling 1">
+          <option value="1">Høj (Wi=1)</option>
+          <option value="0.5">Lav (Wi=0,5)</option>
+        </select>
+      </div>
+      <div class="box h-influence">
+        <select class="wi" aria-label="Indflydelse for handling 2">
+          <option value="1">Høj (Wi=1)</option>
+          <option value="0.5">Lav (Wi=0,5)</option>
+        </select>
+      </div>
+      <div class="box h-influence">
+        <select class="wi" aria-label="Indflydelse for handling 3">
+          <option value="1">Høj (Wi=1)</option>
+          <option value="0.5">Lav (Wi=0,5)</option>
+        </select>
+      </div>
+      <div class="box h-influence">
+        <select class="wi" aria-label="Indflydelse for handling 4">
+          <option value="1">Høj (Wi=1)</option>
+          <option value="0.5">Lav (Wi=0,5)</option>
+        </select>
+      </div>
+      <div class="box h-influence">
+        <select class="wi" aria-label="Indflydelse for handling 5">
+          <option value="1">Høj (Wi=1)</option>
+          <option value="0.5">Lav (Wi=0,5)</option>
+        </select>
+      </div>
+      <div class="box h-influence">
+        <select class="wi" aria-label="Indflydelse for handling 6">
+          <option value="1">Høj (Wi=1)</option>
+          <option value="0.5">Lav (Wi=0,5)</option>
+        </select>
+      </div>
+
+      <!-- Række 3: Ai -->
+      <div class="label">Human/AI agent</div>
+      <div class="box h-agent">
+        <select class="ai" aria-label="Agent for handling 1">
+          <option value="0">Menneske (Ai=0)</option>
+          <option value="1">AI-agent (Ai=1)</option>
+        </select>
+      </div>
+      <div class="box h-agent">
+        <select class="ai" aria-label="Agent for handling 2">
+          <option value="0">Menneske (Ai=0)</option>
+          <option value="1">AI-agent (Ai=1)</option>
+        </select>
+      </div>
+      <div class="box h-agent">
+        <select class="ai" aria-label="Agent for handling 3">
+          <option value="0">Menneske (Ai=0)</option>
+          <option value="1">AI-agent (Ai=1)</option>
+        </select>
+      </div>
+      <div class="box h-agent">
+        <select class="ai" aria-label="Agent for handling 4">
+          <option value="0">Menneske (Ai=0)</option>
+          <option value="1">AI-agent (Ai=1)</option>
+        </select>
+      </div>
+      <div class="box h-agent">
+        <select class="ai" aria-label="Agent for handling 5">
+          <option value="0">Menneske (Ai=0)</option>
+          <option value="1">AI-agent (Ai=1)</option>
+        </select>
+      </div>
+      <div class="box h-agent">
+        <select class="ai" aria-label="Agent for handling 6">
+          <option value="0">Menneske (Ai=0)</option>
+          <option value="1">AI-agent (Ai=1)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Nederste bar -->
+    <div class="authority-wrap">
+      <div></div>
+      <div class="authority-bar-area" aria-label="Fordeling af beslutningsautoritet">
+        <div id="authorityBar" class="authority-bar" aria-hidden="true"></div>
+        <div class="H">H</div>
+        <div class="A">A</div>
+      </div>
+    </div>
+
+    <div class="axis-label">Beslutningsautoritet</div>
+
+    <!-- PAI og PH (som ønsket) -->
+    <div class="metrics" aria-label="Procenter">
+      <div>P<sub>AI</sub>: <span class="val" id="pAi">0</span>%</div>
+      <div>P<sub>H</sub>: <span class="val" id="pH">0</span>%</div>
+    </div>
+  </div>
+
+  <script>
+    function round2(n){ return Math.round(n * 100) / 100; }
+
+    function compute(){
+      const wis = [...document.querySelectorAll(".wi")].map(s => Number(s.value));
+      const ais = [...document.querySelectorAll(".ai")].map(s => Number(s.value));
+
+      let baAI = 0;
+      let baT  = 0;
+
+      for(let i=0;i<wis.length;i++){
+        const Wi = wis[i];
+        const Ai = ais[i];
+        baAI += Ai * Wi;  // BA_AI = Σ(Ai * Wi)
+        baT  += Wi;       // BA_Total = Σ(Wi)
+      }
+
+      const pAI = (baT === 0) ? 0 : (baAI / baT) * 100;
+      const pH  = 100 - pAI;
+
+      // Opdater procenter
+      document.getElementById("pAi").textContent = round2(pAI);
+      document.getElementById("pH").textContent  = round2(pH);
+
+      // Opdater bar: venstre (H) = pH, højre (AI) = pAI
+      const split = Math.max(0, Math.min(100, pH));
+      const bar = document.getElementById("authorityBar");
+      bar.style.background = `linear-gradient(to right,
+        var(--grey-3) 0%,
+        var(--grey-3) ${split}%,
+        var(--grey-2) ${split}%,
+        var(--grey-2) 100%
+      )`;
+    }
+
+    document.querySelectorAll(".wi, .ai").forEach(el => {
+      el.addEventListener("change", compute);
+    });
+
+    compute();
+  </script>
+</body>
+</html>
